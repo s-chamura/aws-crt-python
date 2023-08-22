@@ -70,8 +70,12 @@ static void s_start_destroy_native(struct mqtt_connection_binding *py_connection
         return;
     }
 
+    printf("address before release: %p\n", py_connection->native);
+    printf("address py_connection before release: %p\n", py_connection);
     aws_mqtt_client_connection_release(py_connection->native);
-    aws_thread_current_sleep(1000000000);
+    assert(py_connection);
+    printf("address of py_connection: %p\n", py_connection);
+    printf("address after release: %p\n", py_connection->native);
     py_connection->native = NULL;
 }
 
